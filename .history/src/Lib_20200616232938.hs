@@ -37,26 +37,9 @@ play word = welcome (game word) >>= go where
             (state', _) -> welcome state' >>= go
         return ()
 
-showGame :: Game -> IO()
-showGame state = do
-    putStrLn $ "Cantidad de intento totales : " ++ show  (maxTryTimes state)
-    putStrLn $ "Cantidad de intento ejecutados : " ++ (show $ tryTime state)
-    putStrLn $ "Palabra a adivinar : " ++  intersperse ' ' (wordReady state)
-    putStrLn $ "Letras ya usadas : " ++ intersperse '-' (tryLetters state)
-
-clearScreen :: IO ()
-clearScreen = do
-    _ <- SP.system "reset"
-    return ()      
-
-askWord :: IO String
-askWord = do
-    _ <- clearScreen
-    putStrLn "Bienvenido al Ahorcado"
-    putStr "Jugador 1, ingrese la palabra que sera adivinada : "
-    getLine
-    
+            
 data Result = GameWin | GameLoose | KeepAsking | LetterAlreadyExist deriving (Show, Eq)
+data ActionResult = IsLetterInTryLetters | IsLetterInWordReady | AlreadyUseThisLetter
 step :: Game -> Char -> (Game , Result)
 step state input = 
     let rightGame = rightWay state input
@@ -110,4 +93,14 @@ rightWay state letter =
             else state { tryLetters = (tryLetters state ++ [letter]) , tryTime = nextTryTime}
 
 
+showGame :: Game -> IO()
+showGame state = do
+    putStrLn $ "Cantidad de intento totales : " ++ show  (maxTryTimes state)
+    putStrLn $ "Cantidad de intento ejecutados : " ++ (show $ tryTime state)
+    putStrLn $ "Palabra a adivinar : " ++  intersperse ' ' (wordReady state)
+    putStrLn $ "Letras ya usadas : " ++ intersperse '-' (tryLetters state)
 
+clearScreen :: IO ()
+clearScreen = do
+    _ <- SP.system "reset"
+    return ()

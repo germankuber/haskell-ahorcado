@@ -28,5 +28,5 @@ main = hspec $ do
     it "Return GameLoose" $
       let 
           initialState = Game "Juego" "Jueg_" 3 3 "a"
-          (_ , result) = step initialState 't' 
+          (finalState , result) = step initialState 't' 
       in result `shouldBe` GameLoose

@@ -49,12 +49,6 @@ clearScreen = do
     _ <- SP.system "reset"
     return ()      
 
-askWord :: IO String
-askWord = do
-    _ <- clearScreen
-    putStrLn "Bienvenido al Ahorcado"
-    putStr "Jugador 1, ingrese la palabra que sera adivinada : "
-    getLine
     
 data Result = GameWin | GameLoose | KeepAsking | LetterAlreadyExist deriving (Show, Eq)
 step :: Game -> Char -> (Game , Result)
