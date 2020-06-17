@@ -85,6 +85,7 @@ isCharUsingByWords state input =
             else False
             
 
+
 type WinGame = Bool
 type EndGame = Bool
 checkEnd :: Game -> (EndGame, WinGame)

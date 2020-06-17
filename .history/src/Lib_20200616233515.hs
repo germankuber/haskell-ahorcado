@@ -85,6 +85,7 @@ isCharUsingByWords state input =
             else False
             
 
+
 type WinGame = Bool
 type EndGame = Bool
 checkEnd :: Game -> (EndGame, WinGame)
@@ -97,13 +98,19 @@ rightWay :: Game -> Char -> Game
 rightWay state letter =
     let right = any (==letter) (wordPlay state)
         nextTryTime = (tryTime state) + 1
-        newWordReady = zipWith (replaceLetterWithUnderscore letter) (wordPlay state) (wordReady state)
+        newWordReady = zipWith (\c v -> if c == letter
+                                            then
+                                                [c]
+                                            else
+                                                if v == '_'
+                                                    then "_"
+                                                    else [v]) (wordPlay state) (wordReady state)
     in if right 
             then state { wordReady = concat newWordReady, tryLetters = (tryLetters state ++ [letter]) }
             else state { tryLetters = (tryLetters state ++ [letter]) , tryTime = nextTryTime}
 
-replaceLetterWithUnderscore :: Char -> Char -> Char -> [Char]
-replaceLetterWithUnderscore letter c v  = if c == letter
+replaceLetterWithUnderscore :: Char -> Char -> Char
+replaceLetterWithUnderscore c v = if c == letter
                                             then
                                                 [c]
                                             else

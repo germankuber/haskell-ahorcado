@@ -32,4 +32,4 @@ main = hspec $ do
       in result `shouldBe` GameLoose
   describe "ReplaceLetterWithUnderscore" $ do
     it "Replace the char with _" $
-      replaceLetterWithUnderscore "a" "a" "_" `should` "a"
+      replaceLetterWithUnderscore

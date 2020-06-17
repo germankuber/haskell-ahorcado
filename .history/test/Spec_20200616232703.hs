@@ -30,6 +30,3 @@ main = hspec $ do
           initialState = Game "Juego" "Jueg_" 3 3 "a"
           (_ , result) = step initialState 't' 
       in result `shouldBe` GameLoose
-  describe "ReplaceLetterWithUnderscore" $ do
-    it "Replace the char with _" $
-      replaceLetterWithUnderscore "a" "a" "_" `should` "a"
