@@ -32,4 +32,6 @@ main = hspec $ do
       in result `shouldBe` GameLoose
   describe "ReplaceLetterWithUnderscore" $ do
     it "Replace the char with _" $
-      replaceLetterWithUnderscore "a" "a" "_" `should` "a"
+      (replaceLetterWithUnderscore 'a' 'a' '_') `shouldBe` "a"
+    it "No replace the char with _ when already has letter" $
+      (replaceLetterWithUnderscore 'a' 'a' 'b') `shouldBe` "b"

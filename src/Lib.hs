@@ -103,11 +103,8 @@ rightWay state letter =
             else state { tryLetters = (tryLetters state ++ [letter]) , tryTime = nextTryTime}
 
 replaceLetterWithUnderscore :: Char -> Char -> Char -> [Char]
-replaceLetterWithUnderscore letter c v  = if c == letter
+replaceLetterWithUnderscore letter c v  = if (c /= letter || v == '_')
                                             then
                                                 [c]
                                             else
-                                                if v == '_'
-                                                    then "_"
-                                                    else [v]
-
+                                                [v]
